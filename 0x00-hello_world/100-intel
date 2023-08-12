@@ -1,2 +1,14 @@
-#!/bin/bash 
-gcc -$ -masm=intel $CFILE
+#!/bin/bash
+
+# Get the C file name from the CFILE environment variable
+c_file=$CFILE
+
+# Generate the assembly code using the gcc compiler with the -S flag
+gcc -S -masm=intel "$c_file"
+
+# Rename the generated assembly file to have the .s extension
+asm_file="${c_file%.*}.s"
+mv "${c_file%.*}.s" "$asm_file"
+
+# Print the path to the generated assembly file
+echo "Generated assembly file: $asm_file"
